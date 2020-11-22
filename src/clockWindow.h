@@ -12,8 +12,20 @@
 
 #include <string.h>
 #include <ncurses.h>
+#include <time.h>
+#include <stdio.h>
+#include <string.h>
 #include "blockString.h"
+#include "prgCmdLine.h"
 
+#include "sharedData.h"
+
+static int row, col;
+
+static const enum ColorPairType {   // Pairs of colors available for drawing
+    COLOR_PAIR_WHITE = 0,
+    COLOR_PAIR_GREEN = 1
+} ColorPairs;        
 
 /**
  * Initialize the ncurses window for displaying the clock
@@ -35,5 +47,8 @@ void updateClockWindow(char *timeBuffer, char *dateBuffer);
  */
 void deleteClockWindow();
 
+void suspendClock();
+void resumeClock();
+void clockWait();
 
 #endif 

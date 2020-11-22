@@ -12,13 +12,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "font.h"
+
+#include "sharedData.h"
 
 
-static const size_t LETTER_HEIGHT = 7;
-static const size_t LETTER_WIDTH  = 7;
-static const size_t INTER_LETTER_SPACE = 1;
-
-typedef char GlyphMatrix[7][7];
 
 typedef struct BlockLetter_def {
 	size_t height;

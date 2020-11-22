@@ -7,18 +7,23 @@
 
 #include <pthread.h>
 #include <stdbool.h>
+#include <ncurses.h>
 #include <stdlib.h>
 #include <time.h>
 #include "clockWindow.h"
 #include "dateTimeModel.h"
 #include "scanAndConfig.h"
+#include "prgCmdLine.h"
 
+#include "sharedData.h"
 
 static const long WAIT_MSEC = 500;
 
 static bool isRunning;
 static pthread_mutex_t lockIsRunning;
 
+static int msg;
+static pthread_mutex_t lockMsg;
 
 static void *updateClockThreadFunc(void *arg);
 static void *listenThreadFunc(void *arg);
@@ -27,7 +32,6 @@ static void sleepInLoop(struct timespec *duration_ts);
 
 
 int main(int argc, char *argv[]) {
-
     ProgramConfig *config = scanArguments(argc, argv);
     if (config->shouldExit) {
         return config->exitCode;
@@ -37,6 +41,11 @@ int main(int argc, char *argv[]) {
 
     isRunning = true;
     if (pthread_mutex_init(&lockIsRunning, NULL) != 0) {
+        printf("Failed to initialize mutex.\n");
+        return 1;
+    }
+	msg = 0;
+	if (pthread_mutex_init(&lockMsg, NULL) != 0) {
         printf("Failed to initialize mutex.\n");
         return 1;
     }
@@ -67,9 +76,25 @@ static void *updateClockThreadFunc(void *arg) {
 
     while(1) {
         resetClockWindow();
-
-        updateTimeBuffer(timeBuffer);
+		
+		
+        pthread_mutex_unlock(&lockMsg);
+		if (msg % 32 > 24) {
+			pthread_mutex_lock(&lockMsg);
+			strcpy(timeBuffer, "Hello, World!");
+		} else {
+			pthread_mutex_lock(&lockMsg);
+			updateTimeBuffer(timeBuffer);
+		}
         updateDateBuffer(dateBuffer);
+		
+        pthread_mutex_unlock(&lockMsg);
+		if (msg > 8192) {
+			msg = 0;
+		}
+		msg++;
+        pthread_mutex_lock(&lockMsg);
+		
         updateClockWindow(timeBuffer, dateBuffer);
 
         sleepInLoop(duration_ts);
@@ -91,16 +116,19 @@ static void *updateClockThreadFunc(void *arg) {
  * Listens for key presses in a pthread
  */
 static void *listenThreadFunc(void *arg) {
-
-    while (1) {
-        char c = (char)getch();
-        if (c == 'q' || c == 'Q') {
-            pthread_mutex_unlock(&lockIsRunning);
-            isRunning = false;
-            pthread_mutex_lock(&lockIsRunning);
-            return NULL;
-        }
-    }
+	int ch;
+	while(1) {
+		ch = getch();
+		if (ch == 'q') {
+			break;
+		} else if (ch == 'c') {
+			cmdline();
+		}
+	}
+	
+	pthread_mutex_unlock(&lockIsRunning);
+	isRunning = false;
+	pthread_mutex_lock(&lockIsRunning);
 
     return NULL;
 }

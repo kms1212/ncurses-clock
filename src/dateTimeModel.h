@@ -15,6 +15,8 @@
 #include <time.h>
 #include "scanAndConfig.h"
 
+#include "sharedData.h"
+
 
 /**
  * Configures the time mode (12-hour or 24-hour) used for the date-time-model

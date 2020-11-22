@@ -1,6 +1,6 @@
 # ncurses-clock
 
-Draws a clock in the terminal window using the ncurses library
+Draws a clock in the terminal window using the ncurses library.
 This repo is forked from [mes32](https://github.com/mes32/ncurses-clock)
 
 !["Example window running clock"](./docs/images/example_window.png)
@@ -25,6 +25,28 @@ make install
 clock		#If you installed binary
 ```
 
+## Makefile
+
+```bash
+# Turn DEBUG on for making .core files
+make all DEBUG=YES
+
+# Build binary
+make all
+
+# Install binary
+make install
+
+# Uninstall binary
+make uninstall
+
+# Clean temporary files
+make clean
+
+# Run binary immediately (for dev)
+make run
+```
+
 ## Usage
 
 There are a few alternate usage mode available.
@@ -44,3 +66,7 @@ options supported:
 ## License
 
 The code in this repository is licensed under the [MIT License](./LICENSE).
+
+## Other Information
+
+This repo is tested on [FreeBSD 12.2-RELEASE](https://www.freebsd.org/) with [LLVM/Clang](https://clang.llvm.org/).

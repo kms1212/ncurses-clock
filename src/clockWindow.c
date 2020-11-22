@@ -107,7 +107,7 @@ static void printTime(BlockString *currentTime) {
             int y = row / 2 - LETTER_HEIGHT + i;
             char *line = (*letter->glyph)[i];
 			int j = 0;
-			while ((char)line[j] != NULL) {
+			while ((char)line[j] != 0) {
 				if ((char)line[j] != ' ') {
 					attron(COLOR_PAIR(COLOR_PAIR_GREEN));
 					mvaddch(y, x + j, (char)line[j]);

@@ -12,6 +12,7 @@
 
 #include <string.h>
 #include <ncurses.h>
+#include <pthread.h>
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
@@ -21,6 +22,10 @@
 #include "sharedData.h"
 
 static int row, col;
+
+extern pthread_mutex_t clock_suspend_mutex;
+extern pthread_cond_t clock_resume_cond;
+extern int clock_suspend_flag;
 
 static const enum ColorPairType {   // Pairs of colors available for drawing
     COLOR_PAIR_WHITE = 0,

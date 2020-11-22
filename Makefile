@@ -2,7 +2,12 @@
 
 # --- Define compiler and compiler options ---
 CC = clang
-CFLAGS = -std=c99 -g -Wall -O2
+DEBUG = NO
+ifeq ($(DEBUG), YES)
+	CFLAGS = -std=c99 -g -Wall -O2
+else
+	CFLAGS = -std=c99 -Wall -O2
+endif
 INCLUDES = -lncurses -lpthread -lc
 BYTECODE = clock
 INSTPATH = /usr/bin/clock

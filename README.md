@@ -1,6 +1,7 @@
 # ncurses-clock
 
 Draws a clock in the terminal window using the ncurses library
+This repo is forked from [mes32](https://github.com/mes32/ncurses-clock)
 
 !["Example window running clock"](./docs/images/example_window.png)
 
@@ -8,14 +9,20 @@ Draws a clock in the terminal window using the ncurses library
 
 ```bash
 # Clone this repository
-git clone https://github.com/mes32/ncurses-clock.git
+git clone https://github.com/minping/ncurses-clock.git
 
 # Compile the program using the Makefile
 cd ncurses-clock
+
+# If you just want to build binary, 
 make all
 
-# Start the clock; can be quit by typing 'Q'
-./ncurses-clock
+# If you want to install binary to /usr/bin, 
+make install
+
+# Start the clock
+./bin/clock
+clock		#If you installed binary
 ```
 
 ## Usage
@@ -23,13 +30,15 @@ make all
 There are a few alternate usage mode available.
 
 ```
-Usage: ncurses-clock [options]
-  options:
-    -12h       Use 12-hour clock mode (default)
-    -24h       Use 24-hour clock mode
-    -secs=on   Display time including seconds (default)
-    -secs=off  Display time without seconds
-    -help      Show this help message
+Usage : clock [--auto, -a] [--12h, -t] [--24h, -o] [--secs=on, -s] [--secs=off, -m] [--help, -h]
+options supported:
+   --auto, -a         Display time with variable formats controlled by console size (default)
+                      (Other options are aborted if this option is set from command line)
+   --12h, -t          Use 12-hour clock mode
+   --24h, -o          Use 24-hour clock mode
+   --secs=on, -s      Display time including seconds
+   --secs=off, -m     Display time without seconds
+   --help, -h         Show this help message
 ```
 
 ## License

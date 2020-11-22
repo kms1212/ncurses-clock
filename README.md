@@ -28,7 +28,7 @@ clock		#If you installed binary
 ## Makefile
 
 ```bash
-# Turn DEBUG on for making .core files
+# Turn DEBUG on to make .core files
 make all DEBUG=YES
 
 # Build binary

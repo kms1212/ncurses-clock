@@ -21,7 +21,7 @@
 
 #include "sharedData.h"
 
-#define _POSIX_C_SOURCE >= 199309L
+#define _POSIX_C_SOURCE 199309L
 
 static int row, col;
 

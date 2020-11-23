@@ -8,7 +8,7 @@ ifeq ($(DEBUG), YES)
 else
 	CFLAGS = -std=c99 -Wall -O2
 endif
-INCLUDES = -lncurses -lpthread -lc
+INCLUDES = -lncurses -lpthread -lrt
 BYTECODE = clock
 INSTPATH = /usr/bin/clock
 

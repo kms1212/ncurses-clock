@@ -9,6 +9,8 @@
 
 #include "clockWindow.h"
 
+#define _XOPEN_SOURCE 700
+
 static int row, col;                // Dimensions of the window
 
 static void printTime(BlockString *currentTime);

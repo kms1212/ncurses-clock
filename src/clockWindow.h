@@ -21,6 +21,8 @@
 
 #include "sharedData.h"
 
+#define _POSIX_C_SOURCE >= 199309L
+
 static int row, col;
 
 extern pthread_mutex_t clock_suspend_mutex;

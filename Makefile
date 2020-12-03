@@ -4,9 +4,9 @@
 CC = clang
 DEBUG = NO
 ifeq ($(DEBUG), YES)
-	CFLAGS = -std=c99 -g -Wall -O2
+	CFLAGS = -g -Wall -O2
 else
-	CFLAGS = -std=c99 -Wall -O2
+	CFLAGS = -Wall -O2
 endif
 INCLUDES = -lncurses -lpthread -lrt
 BYTECODE = clock

@@ -43,7 +43,7 @@ make uninstall
 # Clean temporary files
 make clean
 
-# Run binary immediately (for dev)
+# Run binary immediately
 make run
 ```
 
